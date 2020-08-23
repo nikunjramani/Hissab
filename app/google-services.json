@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "283957427316",
+    "firebase_url": "https://hissab-9a2f9.firebaseio.com",
+    "project_id": "hissab-9a2f9",
+    "storage_bucket": "hissab-9a2f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:283957427316:android:462cae73acc4c3bf6a2521",
+        "android_client_info": {
+          "package_name": "com.hissab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "283957427316-is4bu2lk0r67re189l30fnaahnmkltbs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtbsjnY5hI4texRclsnUxCe-32bH7pXoU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "283957427316-is4bu2lk0r67re189l30fnaahnmkltbs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
