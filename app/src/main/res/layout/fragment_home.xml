@@ -34,6 +34,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/total_income"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
@@ -61,6 +62,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/total_profite"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
@@ -113,6 +115,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/today_income"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"
@@ -140,6 +143,8 @@
                     android:orientation="vertical">
 
                     <TextView
+
+                        android:id="@+id/today_profite"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="2"

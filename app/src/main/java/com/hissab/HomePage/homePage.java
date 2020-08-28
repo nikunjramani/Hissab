@@ -15,8 +15,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.hissab.HomePage.ui.account.Account;
 import com.hissab.HomePage.ui.home.HomeFragment;
+import com.hissab.HomePage.ui.patient.patient_details;
+import com.hissab.HomePage.ui.product.product;
 import com.hissab.Login.Login;
 import com.hissab.R;
+import com.hissab.staticValue;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -29,15 +32,15 @@ import androidx.appcompat.widget.Toolbar;
 public class homePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     FirebaseAuth mAuth;
-
+    staticValue staticValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
+        staticValue=new staticValue(homePage.this);
+        com.hissab.staticValue.getDefaultValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 homePage.this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -72,6 +75,10 @@ public class homePage extends AppCompatActivity implements NavigationView.OnNavi
         }else if(id==R.id.nav_account){
             fragment=new Account();
 
+        }else if(id==R.id.nav_product){
+            fragment=new product();
+        }else if(id==R.id.nav_patien){
+            fragment=new patient_details();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

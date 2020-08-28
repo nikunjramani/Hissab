@@ -29,8 +29,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hissab.HomePage.homePage;
 import com.hissab.R;
+import com.hissab.staticValue;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Login extends AppCompatActivity{
     private static final int RC_SIGN_IN = 234;
@@ -39,11 +45,11 @@ public class Login extends AppCompatActivity{
     FirebaseAuth mAuth;
     Button login,singup;
     TextInputEditText email,password;
+    staticValue staticValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         singup=findViewById(R.id.singup);
         login=findViewById(R.id.login);
         email=findViewById(R.id.email);
@@ -122,6 +128,7 @@ public class Login extends AppCompatActivity{
                         if (task.isSuccessful()) {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            defaultValue(user.getUid());
                             startActivity(new Intent(Login.this,homePage.class));
 
                             Toast.makeText(Login.this, "User Signed In", Toast.LENGTH_SHORT).show();
@@ -183,7 +190,7 @@ public class Login extends AppCompatActivity{
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
+                            defaultValue(user.getUid());
                             startActivity(new Intent(Login.this,homePage.class));
 
                         } else {
@@ -198,4 +205,13 @@ public class Login extends AppCompatActivity{
         // [END sign_in_with_email]
     }
 
+    public void defaultValue(String uid){
+        Map<String,Object> medicine = new HashMap<>();
+        medicine.put("mid","1");
+        medicine.put("pid","1");
+        medicine.put("pa_id","1");
+        DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("StaticValue").child(uid);
+        medi.setValue(medicine);
+
+    }
 }

@@ -13,6 +13,14 @@
             android:icon="@drawable/ic_menu_account"
             android:title="@string/menu_account" />
         <item
+            android:id="@+id/nav_product"
+            android:icon="@drawable/ic_menu_account"
+            android:title="@string/menu_product" />
+        <item
+            android:id="@+id/nav_patien"
+            android:icon="@drawable/ic_menu_account"
+            android:title="@string/menu_patient" />
+        <item
             android:id="@+id/nav_signout"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_signout" />
