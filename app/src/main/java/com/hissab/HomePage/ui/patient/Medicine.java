@@ -1,14 +1,14 @@
 package com.hissab.HomePage.ui.patient;
 
 public class Medicine {
-    String mid,p_id,pid,quentity,uid,date,selling_price;
+    String mid,pa_id,pid,quentity,uid,date,selling_price;
 
     Medicine(){
 
     }
-    public Medicine(String date,String mid, String p_id, String pid, String quentity,String selling_price,String uid) {
+    public Medicine(String date,String mid, String pa_id, String pid, String quentity,String selling_price,String uid) {
         this.mid = mid;
-        this.p_id = p_id;
+        this.pa_id = pa_id;
         this.pid = pid;
         this.quentity = quentity;
         this.uid = uid;
@@ -32,12 +32,12 @@ public class Medicine {
         this.mid = mid;
     }
 
-    public String getP_id() {
-        return p_id;
+    public String getPa_id() {
+        return pa_id;
     }
 
-    public void setP_id(String p_id) {
-        this.p_id = p_id;
+    public void setPa_id(String p_id) {
+        this.pa_id = p_id;
     }
 
     public String getPid() {

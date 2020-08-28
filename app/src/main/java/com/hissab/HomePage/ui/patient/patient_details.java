@@ -96,7 +96,7 @@ public class patient_details extends Fragment {
                     medicine.put("pid", pid);
                     medicine.put("quentity", medicine_quentity.getText().toString());
                     medicine.put("selling_price",medicine_selling_price.getText().toString());
-                    medicine.put("p_id", staticValue.getPa_id());
+                    medicine.put("pa_id", staticValue.getPa_id());
                     medicine.put("date", date);
                     DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("Medicine").child(uid).child(String.valueOf(staticValue.getMid()));
                     medi.setValue(medicine);
@@ -105,7 +105,7 @@ public class patient_details extends Fragment {
                     userexist=false;
                 } else if(!userexist) {
                     Map<String, Object> map = new HashMap<>();
-                    map.put("pid", staticValue.getPa_id());
+                    map.put("pa_id", staticValue.getPa_id());
                     map.put("uid", uid);
                     map.put("name", patient_name.getText().toString());
                     map.put("age", patient_age.getText().toString());
@@ -121,7 +121,7 @@ public class patient_details extends Fragment {
                     medicine.put("pid", pid);
                     medicine.put("quentity", medicine_quentity.getText().toString());
                     medicine.put("selling_price",medicine_selling_price.getText().toString());
-                    medicine.put("p_id", staticValue.getPa_id());
+                    medicine.put("pa_id", staticValue.getPa_id());
                     medicine.put("date", date);
                     DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("Medicine").child(uid).child(String.valueOf(staticValue.getMid()));
                     medi.setValue(medicine);
@@ -183,7 +183,7 @@ public class patient_details extends Fragment {
                                 patient_address.setText(issue.getValue(Patient.class).getAddress());
                                 patient_age.setText(issue.getValue(Patient.class).getAge());
                                 patient_number.setText(issue.getValue(Patient.class).getNumber());
-                                pa_id=issue.getValue(Patient.class).getPid();
+                                pa_id=issue.getValue(Patient.class).getPa_id();
                             }
                         }
                     }

@@ -18,21 +18,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class staticValue {
-    static Context ctx;
+    Context ctx;
    static String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-    static SharedPreferences sharedPreferences;
+    private static SharedPreferences sharedPreferences;
 
     public staticValue(Context ctx) {
-        staticValue.ctx = ctx;
+        this.ctx = ctx;
         sharedPreferences = ctx.getSharedPreferences(ctx.getResources().getString(R.string.login_preference), Context.MODE_PRIVATE);;
     }
 
     public static void setPid(int pid){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("pid", pid);
+        editor.putString("pid", String.valueOf(pid));
         editor.apply();
-//        setStaticValue();
+        setStaticValue();
     }
     public static String getPid(){
         return sharedPreferences.getString("pid", "0");
@@ -42,7 +42,7 @@ public class staticValue {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("pa_id", String.valueOf(pa_id));
         editor.apply();
-//        setStaticValue();
+        setStaticValue();
     }
     public static String getPa_id(){
         return sharedPreferences.getString("pa_id", "0");
@@ -51,23 +51,21 @@ public class staticValue {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("mid", String.valueOf(mid));
         editor.apply();
-//        setStaticValue();
+        setStaticValue();
     }
     public static String  getMid(){
         return sharedPreferences.getString("mid","0");
     }
 
     public static void getDefaultValue(String user){
-        FirebaseDatabase.getInstance().getReference().child("StaticValue").child(String.valueOf(user)).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("StaticValue").child(String.valueOf(user)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                Toast.makeText(ctx, dataSnapshot+"", Toast.LENGTH_SHORT).show();
-                    for (DataSnapshot issue : dataSnapshot.getChildren()) {
-                        editor.putString("pa_id","1");
-                        editor.putString("mid","1");
-                        editor.putString("pid","1");
-                    }
+                UserValue userValue=dataSnapshot.getValue(UserValue.class);
+                editor.putString("pa_id", userValue.getPa_id());
+                editor.putString("mid",userValue.getMid());
+                editor.putString("pid",userValue.getPid());
                 editor.apply();
             }
 
@@ -77,32 +75,33 @@ public class staticValue {
             }
         });
     }
-//    public static void setStaticValue(){
-//        final DatabaseReference updateData = FirebaseDatabase.getInstance().getReference();
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("StaticValue/"+uid,new Value(getPa_id(),getMid(),getPid()));
-//        updateData.updateChildren(map);
-//    }
+    public static void setStaticValue(){
+        final DatabaseReference updateData = FirebaseDatabase.getInstance().getReference();
+        Map<String, Object> map = new HashMap<>();
+        map.put("StaticValue/"+uid,new UserValue(getMid(),getPa_id(),getPid()));
+        updateData.updateChildren(map);
+    }
 }
 
-class Value{
-    String pid,pa_id,mid;
+class UserValue{
+    String mid,pa_id,pid;
 
-    public Value(String mid, String pa_id, String pid) {
-        this.pid = pid;
+    public UserValue(){}
+    public UserValue(String mid, String pa_id, String pid) {
+        this.mid = mid;
         this.pa_id = pa_id;
+        this.pid = pid;
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
         this.mid = mid;
     }
 
-    public String getPid1() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
-
-    public String getPa_id1() {
+    public String getPa_id() {
         return pa_id;
     }
 
@@ -110,11 +109,11 @@ class Value{
         this.pa_id = pa_id;
     }
 
-    public String getMid1() {
-        return mid;
+    public String getPid() {
+        return pid;
     }
 
-    public void setMid(String mid) {
-        this.mid = mid;
+    public void setPid(String pid) {
+        this.pid = pid;
     }
 }

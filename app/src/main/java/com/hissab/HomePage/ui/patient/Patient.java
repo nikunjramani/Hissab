@@ -1,13 +1,13 @@
 package com.hissab.HomePage.ui.patient;
 
 public class Patient {
-    String pid,uid,name,number,age,address;
+    String pa_id,uid,name,number,age,address;
 
     public Patient(){
 
     }
-    public Patient(String address,String age,String name,String number,String pid,String uid) {
-        this.pid = pid;
+    public Patient(String address,String age,String name,String number,String pa_id,String uid) {
+        this.pa_id = pa_id;
         this.uid = uid;
         this.name = name;
         this.number = number;
@@ -15,12 +15,12 @@ public class Patient {
         this.address = address;
     }
 
-    public String getPid() {
-        return pid;
+    public String getPa_id() {
+        return pa_id;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setPa_id(String pid) {
+        this.pa_id = pid;
     }
 
     public String getUid() {

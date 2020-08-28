@@ -24,13 +24,17 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseError;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hissab.HomePage.homePage;
 import com.hissab.R;
 import com.hissab.staticValue;
@@ -88,6 +92,7 @@ public class Login extends AppCompatActivity{
         super.onStart();
         if (mAuth.getCurrentUser() != null) {
             finish();
+            defaultValue(mAuth.getCurrentUser().getUid());
             startActivity(new Intent(this, homePage.class));
         }
     }
@@ -205,13 +210,29 @@ public class Login extends AppCompatActivity{
         // [END sign_in_with_email]
     }
 
-    public void defaultValue(String uid){
-        Map<String,Object> medicine = new HashMap<>();
-        medicine.put("mid","1");
-        medicine.put("pid","1");
-        medicine.put("pa_id","1");
-        DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("StaticValue").child(uid);
-        medi.setValue(medicine);
+    public void defaultValue(final String uid){
+        FirebaseDatabase.getInstance().getReference().child("StaticValue").orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.exists()) {
+                    com.hissab.staticValue.getDefaultValue(uid);
+                } else {
+                    Map<String,Object> medicine = new HashMap<>();
+                    medicine.put("mid","1");
+                    medicine.put("pid","1");
+                    medicine.put("pa_id","1");
+                    DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("StaticValue").child(uid);
+                    medi.setValue(medicine);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }
