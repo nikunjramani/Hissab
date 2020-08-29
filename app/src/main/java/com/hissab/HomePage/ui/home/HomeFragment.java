@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -46,6 +47,8 @@ public class HomeFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Home");
+
         uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         today_income=root.findViewById(R.id.today_income);

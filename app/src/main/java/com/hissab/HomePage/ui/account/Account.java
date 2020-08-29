@@ -33,7 +33,7 @@ public class Account extends Fragment {
         imageView = root.findViewById(R.id.imageView);
         textName = root.findViewById(R.id.textViewName);
         textEmail = root.findViewById(R.id.textViewEmail);
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Account");
 
         FirebaseUser user = mAuth.getCurrentUser();
 

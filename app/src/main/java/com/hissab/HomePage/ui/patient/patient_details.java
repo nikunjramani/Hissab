@@ -62,6 +62,7 @@ public class patient_details extends Fragment {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_patient_view, container, false);
         medicine_actual_price=root.findViewById(R.id.medicine_actual_price);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Patient Details");
         patient_address=root.findViewById(R.id.patient_address);
         patient_age=root.findViewById(R.id.patient_age);
         date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -83,10 +84,11 @@ public class patient_details extends Fragment {
 //                    medicine_quentity.setError("Out Of Quantity");
 //                }
                 if (userexist) {
+                    staticValue.setMid(Integer.parseInt(staticValue.getMid()) + 1);
                     Toast.makeText(getActivity(), "true"+pa_id, Toast.LENGTH_SHORT).show();
                     final DatabaseReference updateData = FirebaseDatabase.getInstance().getReference();
                     Map<String, Object> map = new HashMap<>();
-                    map.put("Patient/"+uid+"/"+pa_id,new Patient(patient_address.getText().toString(),patient_age.getText().toString(),patient_name.getText().toString(),patient_number.getText().toString(),String.valueOf(staticValue.getPa_id()),uid));
+                    map.put("Patient/"+uid+"/"+pa_id,new Patient(patient_address.getText().toString(),patient_age.getText().toString(),patient_name.getText().toString(),patient_number.getText().toString(),String.valueOf(Integer.parseInt(staticValue.getPa_id())),uid));
                     updateData.updateChildren(map);
 
                     //                add Medicine Details
@@ -100,10 +102,11 @@ public class patient_details extends Fragment {
                     medicine.put("date", date);
                     DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("Medicine").child(uid).child(String.valueOf(staticValue.getMid()));
                     medi.setValue(medicine);
-                    staticValue.setMid(Integer.parseInt(staticValue.getMid()) + 1);
 
                     userexist=false;
                 } else if(!userexist) {
+                    staticValue.setMid(Integer.parseInt(staticValue.getMid()) + 1);
+                    staticValue.setPa_id(Integer.parseInt(staticValue.getPa_id()) + 1);
                     Map<String, Object> map = new HashMap<>();
                     map.put("pa_id", staticValue.getPa_id());
                     map.put("uid", uid);
@@ -125,8 +128,6 @@ public class patient_details extends Fragment {
                     medicine.put("date", date);
                     DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("Medicine").child(uid).child(String.valueOf(staticValue.getMid()));
                     medi.setValue(medicine);
-                    staticValue.setMid(Integer.parseInt(staticValue.getMid()) + 1);
-                    staticValue.setPa_id(Integer.parseInt(staticValue.getPa_id()) + 1);
 
                 }
 

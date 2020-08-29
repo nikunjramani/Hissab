@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -59,6 +60,7 @@ public class product extends Fragment {
         // Inflate the layout for this fragment
         View root= inflater.inflate(R.layout.fragment_product, container, false);
         ctx=getActivity();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Product");
         uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
         mDatabase =FirebaseDatabase.getInstance().getReference().child("Product").child(uid);
         add_product=root.findViewById(R.id.add_product);

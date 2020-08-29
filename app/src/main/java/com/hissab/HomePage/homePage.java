@@ -17,6 +17,7 @@ import com.hissab.HomePage.ui.account.Account;
 import com.hissab.HomePage.ui.home.HomeFragment;
 import com.hissab.HomePage.ui.patient.patient_details;
 import com.hissab.HomePage.ui.product.product;
+import com.hissab.HomePage.ui.spent.spent;
 import com.hissab.Login.Login;
 import com.hissab.R;
 import com.hissab.staticValue;
@@ -28,6 +29,8 @@ import androidx.fragment.app.Fragment;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class homePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -53,7 +56,7 @@ public class homePage extends AppCompatActivity implements NavigationView.OnNavi
         FirebaseUser user = mAuth.getCurrentUser();
         Glide.with(this)
                 .load(user.getPhotoUrl())
-                .into((ImageView) navigationView.getHeaderView(0).findViewById(R.id.nav_imageView));
+                .into((CircleImageView) navigationView.getHeaderView(0).findViewById(R.id.nav_imageView));
 
         TextView name,email;
         name=navigationView.getHeaderView(0).findViewById(R.id.nav_name);
@@ -79,6 +82,8 @@ public class homePage extends AppCompatActivity implements NavigationView.OnNavi
             fragment=new product();
         }else if(id==R.id.nav_patien){
             fragment=new patient_details();
+        }else if(id==R.id.nav_spent){
+            fragment=new spent();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
