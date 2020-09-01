@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_margin="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+             <LinearLayout
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                    <TextView
+                        android:layout_alignParentLeft="true"
+                        android:id="@+id/product_name"
+                        android:textSize="20dp"
+                        android:text="Product Name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/product_actual_price"
+                            android:text="100"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"/>
+                        <TextView
+                            android:text="Actual Price"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/product_selling_price"
+                            android:text="100"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"/>
+                        <TextView
+                            android:text="Selling Price"
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                 <LinearLayout
+                     android:layout_marginTop="5dp"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="horizontal">
+                     <LinearLayout
+                         android:layout_weight="1"
+                         android:orientation="vertical"
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content">
+                         <TextView
+                             android:id="@+id/product_actual_quentity"
+                             android:text="100"
+                             android:layout_weight="1"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"/>
+                         <TextView
+                             android:text="Quantity"
+                             android:layout_weight="1"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"/>
+                     </LinearLayout>
+                     <LinearLayout
+                         android:layout_weight="1"
+                         android:orientation="vertical"
+                         android:layout_width="0dp"
+                         android:layout_height="wrap_content">
+                         <TextView
+                             android:id="@+id/sp"
+                             android:text="100"
+                             android:layout_weight="1"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"/>
+                         <TextView
+                             android:text="Selling Point"
+                             android:layout_weight="1"
+                             android:layout_width="match_parent"
+                             android:layout_height="0dp"/>
+                     </LinearLayout>
+                 </LinearLayout>
+                 <TextView
+                     android:layout_marginTop="5dp"
+                     android:textSize="20dp"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:text="Date"
+                     android:id="@+id/date"/>
+            </LinearLayout>
+</androidx.cardview.widget.CardView>
+</LinearLayout>

@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,6 +45,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity{
     private static final int RC_SIGN_IN = 234;
+
     private static final String TAG = "LoginActivity";
     GoogleSignInClient mGoogleSignInClient;
     FirebaseAuth mAuth;
@@ -166,6 +168,7 @@ public class Login extends AppCompatActivity{
     }
 
     public void defaultValue(final String uid){
+        staticValue=new staticValue(Login.this);
         FirebaseDatabase.getInstance().getReference().child("StaticValue").orderByKey().equalTo(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -175,8 +178,10 @@ public class Login extends AppCompatActivity{
                 } else {
                     Map<String,Object> medicine = new HashMap<>();
                     medicine.put("mid","1");
+                    medicine.put("nid","1");
                     medicine.put("pid","1");
                     medicine.put("pa_id","1");
+                    medicine.put("sid","1");
                     DatabaseReference medi = FirebaseDatabase.getInstance().getReference().child("StaticValue").child(uid);
                     medi.setValue(medicine);
                 }

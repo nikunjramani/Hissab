@@ -1,16 +1,25 @@
 package com.hissab.HomePage.ui.product;
 
 public class Product {
-    public String pid,name,actualPrice,sellingPrice,quentity,date;
+    public String pid,name,actualPrice,sellingPrice,quentity,date,sp;
 
     public Product(){}
-    public Product(String actualPrice, String date, String name, String pid, String quentity, String sellingPrice) {
+    public Product(String actualPrice, String date, String name, String pid, String quentity,String sp, String sellingPrice) {
         this.pid = pid;
+        this.sp=sp;
         this.name = name;
         this.actualPrice = actualPrice;
         this.sellingPrice = sellingPrice;
         this.quentity = quentity;
         this.date = date;
+    }
+
+    public String getSp() {
+        return sp;
+    }
+
+    public void setSp(String sp) {
+        this.sp = sp;
     }
 
     public String getPid() {

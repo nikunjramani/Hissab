@@ -1,48 +1,35 @@
 package com.hissab.HomePage.ui.home;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hissab.HomePage.ui.patient.Medicine;
-import com.hissab.HomePage.ui.patient.Patient;
 import com.hissab.HomePage.ui.product.Product;
-import com.hissab.Login.Login;
+import com.hissab.HomePage.ui.product.Stoke;
 import com.hissab.R;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 
 public class HomeFragment extends Fragment {
-    int today_income_sum = 0,total_profite_sum = 0,total_income_sum = 0,today_profite_sum=0;
+    int total_sp=0,today_income_sum = 0,total_profite_sum = 0,total_income_sum = 0,today_profite_sum=0;
     String uid,date;
-    TextView today_income,today_profite,total_income,total_profite;
+    TextView today_income,today_profite,total_income,total_profite,sp;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
@@ -55,6 +42,7 @@ public class HomeFragment extends Fragment {
         total_profite=root.findViewById(R.id.total_profite);
         today_profite=root.findViewById(R.id.today_profite);
         total_income=root.findViewById(R.id.total_income);
+        sp=root.findViewById(R.id.total_sp);
         getData();
         return root;
     }
@@ -67,11 +55,11 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot areaSnapshot : snapshot.getChildren()) {
                     total_income_sum =total_income_sum + (Integer.parseInt(areaSnapshot.getValue(Medicine.class).getSelling_price())*Integer.parseInt(areaSnapshot.getValue(Medicine.class).getQuentity()));
                 }
-             if(total_income_sum!=0){
-                total_income.setText(String.valueOf(total_income_sum));
-            }else {
-                total_income.setText("0");
-            }
+                if(total_income_sum!=0){
+                    total_income.setText(String.valueOf(total_income_sum));
+                }else {
+                    total_income.setText("0");
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -141,11 +129,11 @@ public class HomeFragment extends Fragment {
                         public void onDataChange(@NonNull DataSnapshot snapshot1) {
                             for (DataSnapshot areaSnapshot1 : snapshot1.getChildren()) {
                                 today_profite_sum =(today_profite_sum + Integer.parseInt(areaSnapshot1.getValue(Product.class).getActualPrice())*quantity);
-                                if(today_profite_sum !=0) {
-                                    today_profite.setText((today_income_sum - today_profite_sum)+"");
-                                }else {
-                                    today_profite.setText("0");
-                                }
+                            }
+                            if(today_profite_sum !=0) {
+                                today_profite.setText((today_income_sum - today_profite_sum)+"");
+                            }else {
+                                today_profite.setText("0");
                             }
                         }
                         @Override
@@ -154,6 +142,21 @@ public class HomeFragment extends Fragment {
                         }
                     });
                 }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference().child("Stoke").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot areaSnapshot : snapshot.getChildren()) {
+                    int quantity=Integer.parseInt(areaSnapshot.getValue(Stoke.class).getSp());
+                    total_sp +=quantity;
+                }
+                sp.setText(String.valueOf(total_sp));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

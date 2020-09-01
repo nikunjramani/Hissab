@@ -30,4 +30,6 @@
     <string name="login_preference">test</string>
     <string name="menu_patient">Patient</string>
     <string name="menu_spent">Spent</string>
+    <string name="menu_stoke">Stoke</string>
+    <string name="menu_note">Note</string>
 </resources>

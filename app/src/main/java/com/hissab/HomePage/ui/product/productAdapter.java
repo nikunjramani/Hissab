@@ -57,13 +57,14 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
         holder.edit_product.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final TextInputEditText product_name,product_quentity,actual_price,selling_price;
+                final TextInputEditText product_name,product_quentity,actual_price,sp,selling_price;
                 final String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
                 final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 View view = View.inflate(ctx, R.layout.add_product, null);
                 product_name = view.findViewById(R.id.product_name);
                 actual_price = view.findViewById(R.id.actual_price);
                 selling_price = view.findViewById(R.id.selling_price);
+                sp = view.findViewById(R.id.product_sp);
                 product_quentity = view.findViewById(R.id.product_quentity);
                 product_name.setText(product.getName());
                 actual_price.setText(product.getActualPrice());
@@ -77,7 +78,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
                     public void onClick(DialogInterface dialog, int which) {
                         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
                         Map<String, Object> map = new HashMap<>();
-                        map.put("Product/"+uid+"/"+product.getPid(),new Product(actual_price.getText().toString(),date,product_name.getText().toString(),"pid",product_quentity.getText().toString(),selling_price.getText().toString()));
+                        map.put("Product/"+uid+"/"+product.getPid(),new Product(actual_price.getText().toString(),date,product_name.getText().toString(),"pid",product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
                         mDatabase.updateChildren(map);
                         AppCompatActivity activity = (AppCompatActivity) ctx;
                         Fragment myFragment = new product();

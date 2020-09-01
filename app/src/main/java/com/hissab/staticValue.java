@@ -47,6 +47,7 @@ public class staticValue {
     public static String getPa_id(){
         return sharedPreferences.getString("pa_id", "0");
     }
+
     public static void setMid(int mid){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("mid", String.valueOf(mid));
@@ -55,6 +56,26 @@ public class staticValue {
     }
     public static String  getMid(){
         return sharedPreferences.getString("mid","0");
+    }
+
+    public static void setSid(int sid){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("sid", String.valueOf(sid));
+        editor.apply();
+        setStaticValue();
+    }
+    public static String  getSid(){
+        return sharedPreferences.getString("sid","0");
+    }
+
+    public static void setNid(int nid){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("nid", String.valueOf(nid));
+        editor.apply();
+        setStaticValue();
+    }
+    public static String  getNid(){
+        return sharedPreferences.getString("nid","0");
     }
 
     public static void getDefaultValue(String user){
@@ -66,6 +87,8 @@ public class staticValue {
                 editor.putString("pa_id", userValue.getPa_id());
                 editor.putString("mid",userValue.getMid());
                 editor.putString("pid",userValue.getPid());
+                editor.putString("sid",userValue.getSid());
+                editor.putString("nid",userValue.getNid());
                 editor.apply();
             }
 
@@ -78,19 +101,37 @@ public class staticValue {
     public static void setStaticValue(){
         final DatabaseReference updateData = FirebaseDatabase.getInstance().getReference();
         Map<String, Object> map = new HashMap<>();
-        map.put("StaticValue/"+uid,new UserValue(getMid(),getPa_id(),getPid()));
+        map.put("StaticValue/"+uid,new UserValue(getMid(),getNid(),getPa_id(),getPid(),getSid()));
         updateData.updateChildren(map);
     }
 }
 
 class UserValue{
-    String mid,pa_id,pid;
+    String mid,pa_id,pid,sid,nid;
 
     public UserValue(){}
-    public UserValue(String mid, String pa_id, String pid) {
+    public UserValue(String mid,String nid, String pa_id, String pid,String sid) {
         this.mid = mid;
         this.pa_id = pa_id;
         this.pid = pid;
+        this.sid=sid;
+        this.nid=nid;
+    }
+
+    public String getNid() {
+        return nid;
+    }
+
+    public void setNid(String nid) {
+        this.nid = nid;
+    }
+
+    public String getSid() {
+        return sid;
+    }
+
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 
     public String getMid() {
