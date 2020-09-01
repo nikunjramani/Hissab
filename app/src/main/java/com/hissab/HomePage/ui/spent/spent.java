@@ -66,58 +66,6 @@ public class spent extends Fragment {
 
     private void getSpentList() {
         list_spent.setLayoutManager(new LinearLayoutManager(ctx));
-//        FirebaseDatabase.getInstance().getReference().child("Medicine").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-////                spentList.clear();
-//                Medicine medicine=snapshot.getValue(Medicine.class);
-//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                    pa_id = dataSnapshot.child("pa_id").getValue().toString();
-//                    price = dataSnapshot.child("selling_price").getValue().toString();
-//                    date = dataSnapshot.child("date").getValue().toString();
-//                    pid = dataSnapshot.child("pid").getValue().toString();
-////                    medicine_name=dataSnapshot.child("name").getValue().toString();
-//                    FirebaseDatabase.getInstance().getReference().child("Patient").child(uid).orderByChild("pa_id").equalTo(pa_id).addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            String patient = snapshot.getValue(Patient.class).getName();
-//                            for (DataSnapshot areaSnapshot1 : snapshot.getChildren()) {
-//                                name = areaSnapshot1.getValue(Patient.class).getName();
-//                                FirebaseDatabase.getInstance().getReference().child("Product").child(uid).orderByChild("pid").equalTo(pid).addValueEventListener(new ValueEventListener() {
-//                                    @Override
-//                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//
-//                                        for (DataSnapshot areaSnapshot1 : snapshot.getChildren()) {
-//
-//
-//                                        }
-//
-//                                    }
-//
-//                                    @Override
-//                                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                                    }
-//                                });
-//                            }
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//
-//                        }
-//                    });
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
         FirebaseDatabase.getInstance().getReference().child("Medicine").child(uid).addValueEventListener(new ValueEventListener() {
 
             @Override

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".HomePage.ui.patient.patient_details">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <androidx.cardview.widget.CardView
         android:layout_margin="5dp"
         android:layout_width="match_parent"
@@ -70,8 +74,9 @@
 
     <androidx.cardview.widget.CardView
         android:layout_margin="5dp"
+        android:id="@+id/c1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp">
         <LinearLayout
             android:layout_margin="5dp"
             android:layout_width="match_parent"
@@ -81,9 +86,14 @@
                 android:text="Previous Medicine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-            <androidx.recyclerview.widget.RecyclerView
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_pspent"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+            </ScrollView>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <androidx.cardview.widget.CardView
@@ -129,11 +139,31 @@
                 <TextView
                     android:textSize="15dp"
                     android:id="@+id/medicine_actual_price"
-                    android:text="2000"
+                    android:text="0"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
+
             </LinearLayout>
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:textSize="15dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Available Quentity"/>
+            <TextView
+                android:textSize="15dp"
+                android:id="@+id/medicine_available_quentity"
+                android:text="10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
             <LinearLayout
                 android:layout_margin="5dp"
                 android:orientation="horizontal"
@@ -172,3 +202,4 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>
+</ScrollView>
