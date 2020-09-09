@@ -153,10 +153,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot areaSnapshot : snapshot.getChildren()) {
-                    int quantity=Integer.parseInt(areaSnapshot.getValue(Stoke.class).getSp());
-                    total_sp +=quantity;
+                    int sp1=Integer.parseInt(areaSnapshot.getValue(Stoke.class).getSp());
+                    int quantity=Integer.parseInt(areaSnapshot.getValue(Stoke.class).getQuantity());
+                    total_sp +=quantity*sp1;
+                    if(total_sp == 0){
+                        sp.setText(String.valueOf("0"));
+
+                    }else {
+                        sp.setText(String.valueOf(total_sp));
+                    }
                 }
-                sp.setText(String.valueOf(total_sp));
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

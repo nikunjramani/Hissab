@@ -102,9 +102,6 @@ public class patient_details extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(Integer.parseInt(medicine_quentity.getText().toString())<quantity){
-//                    medicine_quentity.setError("Out Of Quantity");
-//                }
                 if (Integer.parseInt(String.valueOf(medicine_quentity.getText())) > quantity) {
                     medicine_quentity.setError("Out Of Quantity");
                 } else {
@@ -161,8 +158,10 @@ public class patient_details extends Fragment {
                     Map<String, Object> map = new HashMap<>();
                     map.put("quentity", String.valueOf(quantity - Integer.parseInt(medicine_quentity.getText().toString())));
                     updateQuantity.updateChildren(map);
-                    getFragmentManager().beginTransaction().detach(patient_details.this).commit();
-                    getFragmentManager().beginTransaction().attach(patient_details.this).commit();
+                    Fragment myFragment = new patient_details();
+                    getFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, myFragment).addToBackStack(null).commit();
+//                    getFragmentManager().beginTransaction().detach(patient_details.this).commit();
+//                    getFragmentManager().beginTransaction().attach(patient_details.this).commit();
                 }
             }
         });

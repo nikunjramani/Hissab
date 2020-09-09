@@ -68,6 +68,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
                 sp = view.findViewById(R.id.product_sp);
                 product_quentity = view.findViewById(R.id.product_quentity);
                 product_name.setText(product.getName());
+                sp.setText(product.getSp());
                 actual_price.setText(product.getActualPrice());
                 selling_price.setText(product.getSellingPrice());
                 product_quentity.setText(product.getQuentity());
@@ -81,7 +82,8 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
                         Map<String, Object> map = new HashMap<>();
                         map.put("Product/"+uid+"/"+product.getPid(),new Product(actual_price.getText().toString(),date,product_name.getText().toString(),product.getPid(),product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
                         mDatabase.updateChildren(map);
-                        FirebaseDatabase.getInstance().getReference().child("Stoke").child(uid).child(staticValue.getSid()).setValue(new Stoke(staticValue.getSid(),product.getPid(),product_quentity.getText().toString(),sp.getText().toString(),date));
+                        int q=Integer.parseInt(product_quentity.getText().toString())-Integer.parseInt(product.getQuentity());
+                        FirebaseDatabase.getInstance().getReference().child("Stoke").child(uid).child(staticValue.getSid()).setValue(new Stoke(staticValue.getSid(),product.getPid(),String.valueOf(q),sp.getText().toString(),date));
                         staticValue.setSid(Integer.parseInt(staticValue.getSid())+1);
                         AppCompatActivity activity = (AppCompatActivity) ctx;
                         Fragment myFragment = new product();
