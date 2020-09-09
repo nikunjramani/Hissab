@@ -1,14 +1,22 @@
 package com.hissab.HomePage;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.hissab.HomePage.ui.Stoke.stoke;
 import com.hissab.HomePage.ui.account.Account;
 import com.hissab.HomePage.ui.home.HomeFragment;
@@ -20,7 +28,9 @@ import com.hissab.Login.Login;
 import com.hissab.R;
 import com.hissab.staticValue;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -60,7 +70,28 @@ public class homePage extends AppCompatActivity implements NavigationView.OnNavi
         name.setText(user.getDisplayName());
         email=navigationView.getHeaderView(0).findViewById(R.id.nav_email);
         email.setText(user.getEmail());
+        checkAccess();
         loadFragment(new HomeFragment());
+    }
+    private void checkAccess() {
+        FirebaseDatabase.getInstance().getReference().child("Access").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.child("access").getValue().equals("yes")) {
+
+                } else {
+                    android.os.Process.killProcess(android.os.Process.myPid());
+                    System.exit(1);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override

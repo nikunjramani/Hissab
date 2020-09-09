@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.hissab.R;
+import com.hissab.staticValue;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -78,8 +79,10 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
                     public void onClick(DialogInterface dialog, int which) {
                         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
                         Map<String, Object> map = new HashMap<>();
-                        map.put("Product/"+uid+"/"+product.getPid(),new Product(actual_price.getText().toString(),date,product_name.getText().toString(),"pid",product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
+                        map.put("Product/"+uid+"/"+product.getPid(),new Product(actual_price.getText().toString(),date,product_name.getText().toString(),product.getPid(),product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
                         mDatabase.updateChildren(map);
+                        FirebaseDatabase.getInstance().getReference().child("Stoke").child(uid).child(staticValue.getSid()).setValue(new Stoke(staticValue.getSid(),product.getPid(),product_quentity.getText().toString(),sp.getText().toString(),date));
+                        staticValue.setSid(Integer.parseInt(staticValue.getSid())+1);
                         AppCompatActivity activity = (AppCompatActivity) ctx;
                         Fragment myFragment = new product();
                         activity.getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment, myFragment).addToBackStack(null).commit();

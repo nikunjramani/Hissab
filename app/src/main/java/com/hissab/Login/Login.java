@@ -1,5 +1,6 @@
 package com.hissab.Login;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.auth.api.Auth;
@@ -37,10 +39,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hissab.HomePage.homePage;
+import com.hissab.HomePage.ui.product.Product;
+import com.hissab.HomePage.ui.product.Stoke;
+import com.hissab.HomePage.ui.product.product;
 import com.hissab.R;
 import com.hissab.staticValue;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Login extends AppCompatActivity{
@@ -57,14 +65,13 @@ public class Login extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         email=findViewById(R.id.email);
         password=findViewById(R.id.password);
-
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
+        mGoogleSignInClient = GoogleSignIn.getClient(Login.this, gso);
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

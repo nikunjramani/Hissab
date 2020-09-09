@@ -74,7 +74,7 @@ public class product extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
                         Map<String, Object> map = new HashMap<>();
-                            mDatabase.child(staticValue.getPid()).setValue(new Product(actual_price.getText().toString(),date,product_name.getText().toString(),staticValue.getPid(),product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
+                        mDatabase.child(staticValue.getPid()).setValue(new Product(actual_price.getText().toString(),date,product_name.getText().toString(),staticValue.getPid(),product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
                         FirebaseDatabase.getInstance().getReference().child("Stoke").child(uid).child(staticValue.getSid()).setValue(new Stoke(staticValue.getSid(),staticValue.getPid(),product_quentity.getText().toString(),sp.getText().toString(),date));
                         staticValue.setPid(Integer.parseInt(staticValue.getPid())+1);
                         staticValue.setSid(Integer.parseInt(staticValue.getSid())+1);
