@@ -1,5 +1,6 @@
 package com.hissab.HomePage.ui.product;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,6 +32,7 @@ import com.hissab.staticValue;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -60,12 +65,38 @@ public class product extends Fragment {
             @Override
             public void onClick(View v) {
                 final TextInputEditText product_name,product_quentity,actual_price,selling_price,sp;
+                final TextView setdate;
                 View view = View.inflate(ctx, R.layout.add_product, null);
                 product_name = view.findViewById(R.id.product_name);
                 actual_price = view.findViewById(R.id.actual_price);
                 selling_price = view.findViewById(R.id.selling_price);
                 sp = view.findViewById(R.id.product_sp);
                 product_quentity = view.findViewById(R.id.product_quentity);
+                setdate=view.findViewById(R.id.setDate);
+                final Calendar calendar=Calendar.getInstance();
+                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        String myFormat = "MM/dd/yy"; //In which you need put here
+                        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                        setdate.setText(sdf.format(calendar.getTime()));
+                    }
+                };
+                setdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new DatePickerDialog(getContext(), date, calendar
+                                .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                                calendar.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 alert.setView(view);
                 alert.setTitle("Add Product");
@@ -74,7 +105,7 @@ public class product extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
                         Map<String, Object> map = new HashMap<>();
-                        mDatabase.child(staticValue.getPid()).setValue(new Product(actual_price.getText().toString(),date,product_name.getText().toString(),staticValue.getPid(),product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
+                        mDatabase.child(staticValue.getPid()).setValue(new Product(actual_price.getText().toString(),setdate.getText().toString(),product_name.getText().toString(),staticValue.getPid(),product_quentity.getText().toString(),sp.getText().toString(),selling_price.getText().toString()));
                         FirebaseDatabase.getInstance().getReference().child("Stoke").child(uid).child(staticValue.getSid()).setValue(new Stoke(staticValue.getSid(),staticValue.getPid(),product_quentity.getText().toString(),sp.getText().toString(),date));
                         staticValue.setPid(Integer.parseInt(staticValue.getPid())+1);
                         staticValue.setSid(Integer.parseInt(staticValue.getSid())+1);
