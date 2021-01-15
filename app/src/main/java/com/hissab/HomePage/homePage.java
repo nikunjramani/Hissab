@@ -70,28 +70,7 @@ public class homePage extends AppCompatActivity implements NavigationView.OnNavi
         name.setText(user.getDisplayName());
         email=navigationView.getHeaderView(0).findViewById(R.id.nav_email);
         email.setText(user.getEmail());
-        checkAccess();
         loadFragment(new HomeFragment());
-    }
-    private void checkAccess() {
-        FirebaseDatabase.getInstance().getReference().child("Access").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.child("access").getValue().equals("yes")) {
-
-                } else {
-                    android.os.Process.killProcess(android.os.Process.myPid());
-                    System.exit(1);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
     @Override

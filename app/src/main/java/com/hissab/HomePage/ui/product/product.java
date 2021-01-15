@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -65,7 +66,7 @@ public class product extends Fragment {
             @Override
             public void onClick(View v) {
                 final TextInputEditText product_name,product_quentity,actual_price,selling_price,sp;
-                final TextView setdate;
+                final Button setdate;
                 View view = View.inflate(ctx, R.layout.add_product, null);
                 product_name = view.findViewById(R.id.product_name);
                 actual_price = view.findViewById(R.id.actual_price);

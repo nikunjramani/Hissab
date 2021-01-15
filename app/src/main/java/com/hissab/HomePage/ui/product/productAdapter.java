@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -64,7 +65,7 @@ public class productAdapter extends RecyclerView.Adapter<productAdapter.ViewHold
             public void onClick(View v) {
                 final TextInputEditText product_name,product_quentity,actual_price,sp,selling_price;
                 final String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
-                final TextView setdate;
+                final Button setdate;
                 final DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
                 View view = View.inflate(ctx, R.layout.add_product, null);
                 product_name = view.findViewById(R.id.product_name);

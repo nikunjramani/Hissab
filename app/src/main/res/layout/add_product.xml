@@ -69,9 +69,9 @@
                 android:hint="Sp"/>
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
-    <TextView
+    <Button
+        android:background="@drawable/fui_ic_github_white_24dp"
         android:textAlignment="center"
-        android:textSize="20sp"
         android:text="Select Date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
